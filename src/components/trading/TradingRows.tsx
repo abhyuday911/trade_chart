@@ -180,7 +180,7 @@ export const TokenRow: React.FC<TokenRowProps> = ({
 
       <TableCell className="py-4">
         <div className="flex items-center  gap-2">
-          <Button size="sm" disabled={isLoading}>
+          <Button size="sm" disabled={isLoading} variant={"primaryBlue"} shape={"full"}>
             {isLoading ? "Buying..." : "Buy"}
           </Button>
         </div>

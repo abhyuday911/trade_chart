@@ -5,6 +5,8 @@
 
 @theme inline {
   --color-background: var(--background);
+  --color-backgroundSecondary: var(--bg-secondary);
+  --color-primaryBlue: var(--bg-primaryBlue);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -46,6 +48,8 @@
 :root {
   --radius: 0.625rem;
   --background: oklch(0.059 0.004 267.56);
+  --bg-secondary: oklch(0.1779 0.0064 271.04);
+  --bg-primaryBlue: oklch(0.602 0.2155 270.04);
   --foreground: oklch(0.141 0.005 285.823);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.141 0.005 285.823);

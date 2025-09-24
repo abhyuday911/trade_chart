@@ -38,7 +38,7 @@ export const TradingTable: React.FC<TradingTableProps> = ({
             {headers.map((header) => (
               <TableHead
                 key={header}
-                className="font-medium text-muted-foreground px-0 first:sm:px-[12px]"
+                className="font-medium text-muted-foreground px-0 first:sm:px-[12px] h-[32px] sm:h-[48px] min-h-[32px] sm:min-h-[48px] max-h-[32px]"
               >
                 <div className="flex flex-row gap-[4px] px-[12px] justify-start items-center ">
                   <span className="text-textTertiary text-[12px] font-medium">
