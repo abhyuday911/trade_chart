@@ -48,7 +48,7 @@ export function TableSkeleton() {
               <Skeleton className="h-3 w-24" />
             </div>
           </div>
-          <Skeleton className="w-24 h-6 mr-4" />
+          <Skeleton className="w-24 h-12 mr-4" />
         </div>
       </TableCell>
 

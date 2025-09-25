@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Filter, Settings } from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Filter } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
+import { Separator } from "../ui/separator";
 
 interface TradingHeaderProps {
   activeTab: string;
   activeTimeframe: string;
   onTabChange: (tab: string) => void;
   onTimeframeChange: (timeframe: string) => void;
+  onSortChange: (sortField: string, sortDirection: "asc" | "desc") => void; // Callback for sorting changes
+  sortField: string;
+  sortDirection: "asc" | "desc";
 }
 
 export const TradingHeader: React.FC<TradingHeaderProps> = ({
@@ -16,6 +24,9 @@ export const TradingHeader: React.FC<TradingHeaderProps> = ({
   activeTimeframe,
   onTabChange,
   onTimeframeChange,
+  onSortChange,
+  sortField,
+  sortDirection,
 }) => {
   const tabs = ["Trending", "Surge", "DEX Screener", "Pump Live"];
   const timeframes = ["1m", "5m", "30m", "1h"];
@@ -33,50 +44,113 @@ export const TradingHeader: React.FC<TradingHeaderProps> = ({
           </TabsList>
         </Tabs>
 
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-1 bg-muted rounded-lg p-1">
+        {/* Timeframes */}
+        <div className="flex gap-8">
+          <div className="flex items-center gap-2">
             {timeframes.map((timeframe) => (
               <Button
                 key={timeframe}
                 variant={activeTimeframe === timeframe ? "default" : "ghost"}
                 size="sm"
                 onClick={() => onTimeframeChange(timeframe)}
-                className="text-xs h-8"
               >
                 {timeframe}
               </Button>
             ))}
           </div>
 
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex items-center gap-2"
-          >
-            <Filter className="w-4 h-4" />
-            Filter
-          </Button>
+          {/* Sort Modal */}
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                size="sm"
+                className="flex items-center gap-2"
+              >
+                <Filter className="w-4 h-4" />
+                Sort
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-64 p-2">
+              <div className="space-y-2">
+                <p className="text-sm font-medium text-muted-foreground">
+                  Sort Options
+                </p>
+                <Separator className="my-2" />
 
-          <div className="flex items-center gap-2">
-            <Settings className="w-4 h-4 text-muted-foreground" />
-            <Badge variant="secondary">1</Badge>
-          </div>
+                {/* Market Cap */}
+                <div>
+                  <p className="text-sm font-medium">Market Cap</p>
+                  <div className="flex flex-col space-y-1 mt-1">
+                    <Button
+                      variant={"ghost"}
+                      size="sm"
+                      onClick={() => onSortChange("marketCap", "desc")}
+                    >
+                      High to Low
+                    </Button>
+                    <Button
+                      variant={"ghost"}
+                      size="sm"
+                      onClick={() => onSortChange("marketCap", "asc")}
+                    >
+                      Low to High
+                    </Button>
+                  </div>
+                </div>
 
-          <div className="flex items-center gap-2 text-xs">
-            <span className="text-muted-foreground">Quick Buy</span>
-            <span>0.0</span>
-            <div className="flex gap-1">
-              <Badge variant="outline" className="text-xs px-2 py-0">
-                P1
-              </Badge>
-              <Badge variant="outline" className="text-xs px-2 py-0">
-                P2
-              </Badge>
-              <Badge variant="outline" className="text-xs px-2 py-0">
-                P3
-              </Badge>
-            </div>
-          </div>
+                <Separator className="my-2" />
+
+                {/* Liquidity */}
+                <div>
+                  <p className="text-sm font-medium">Liquidity</p>
+                  <div className="flex flex-col space-y-1 mt-1">
+                    <Button
+                      variant={"ghost"}
+                      size="sm"
+                      onClick={() => onSortChange("liquidity", "desc")}
+                    >
+                      High to Low
+                    </Button>
+                    <Button
+                      variant={"ghost"}
+                      size="sm"
+                      onClick={() => onSortChange("liquidity", "asc")}
+                    >
+                      Low to High
+                    </Button>
+                  </div>
+                </div>
+
+                <Separator className="my-2" />
+
+                {/* Volume */}
+                <div>
+                  <p className="text-sm font-medium">Volume</p>
+                  <div className="flex flex-col space-y-1 mt-1">
+                    <Button
+                      variant={"ghost"}
+                      size="sm"
+                      onClick={() => onSortChange("volume24h", "desc")}
+                    >
+                      High to Low
+                    </Button>
+                    <Button
+                      variant={
+                        sortField === "volume24h" && sortDirection === "asc"
+                          ? "default"
+                          : "ghost"
+                      }
+                      size="sm"
+                      onClick={() => onSortChange("volume24h", "asc")}
+                    >
+                      Low to High
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </PopoverContent>
+          </Popover>
         </div>
       </div>
     </div>
