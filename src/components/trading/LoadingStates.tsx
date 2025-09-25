@@ -13,7 +13,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "../ui/button";
 
 export function TableSkeleton() {
-  const headerCount = 7; 
+  const headerCount = 7;
   const rowCount = 8;
 
   return (
@@ -36,81 +36,85 @@ export function TableSkeleton() {
         <TableBody>
           {Array.from({ length: rowCount }).map((_, i) => (
             <TableRow key={i}>
-      <TableCell className="py-4 px-0 sm:px-[12px]">
-        <div className="flex justify-between">
-          <div className="flex items-center gap-3 px-[12px]">
-            <Skeleton className="sm:w-[56px] sm:h-[56px] w-10 h-10 rounded-[3px]" />
-            <div className="flex flex-col gap-2">
-              <div className="flex items-center gap-2">
-                <Skeleton className="h-4 w-12" />
-                <Skeleton className="h-4 w-20" />
-              </div>
-              <Skeleton className="h-3 w-24" />
-            </div>
-          </div>
-          <Skeleton className="w-24 h-12 mr-4" />
-        </div>
-      </TableCell>
+              <TableCell className="py-4 px-0 sm:px-[12px]">
+                <div className="flex justify-between">
+                  <div className="flex items-center gap-3 px-[12px]">
+                    <Skeleton className="sm:w-[56px] sm:h-[56px] w-10 h-10 rounded-[3px]" />
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-center gap-2">
+                        <Skeleton className="h-4 w-12" />
+                        <Skeleton className="h-4 w-20" />
+                      </div>
+                      <Skeleton className="h-3 w-24" />
+                    </div>
+                  </div>
+                  <Skeleton className="w-24 h-12 mr-4" />
+                </div>
+              </TableCell>
 
-      {/* Market Cap */}
-      <TableCell>
-        <div className="flex flex-col gap-1">
-          <Skeleton className="h-4 w-16" />
-          <Skeleton className="h-3 w-10" />
-        </div>
-      </TableCell>
+              {/* Market Cap */}
+              <TableCell>
+                <div className="flex flex-col gap-1">
+                  <Skeleton className="h-4 w-16" />
+                  <Skeleton className="h-3 w-10" />
+                </div>
+              </TableCell>
 
-      {/* Liquidity */}
-      <TableCell>
-        <Skeleton className="h-4 w-16" />
-      </TableCell>
+              {/* Liquidity */}
+              <TableCell>
+                <Skeleton className="h-4 w-16" />
+              </TableCell>
 
-      {/* Volume */}
-      <TableCell>
-        <Skeleton className="h-4 w-16" />
-      </TableCell>
+              {/* Volume */}
+              <TableCell>
+                <Skeleton className="h-4 w-16" />
+              </TableCell>
 
-      {/* Transactions */}
-      <TableCell>
-        <div className="flex flex-col gap-1">
-          <Skeleton className="h-4 w-12" />
-          <Skeleton className="h-3 w-20" />
-        </div>
-      </TableCell>
+              {/* Transactions */}
+              <TableCell>
+                <div className="flex flex-col gap-1">
+                  <Skeleton className="h-4 w-12" />
+                  <Skeleton className="h-3 w-20" />
+                </div>
+              </TableCell>
 
-      {/* Price changes + audit */}
-      <TableCell>
-        <div className="flex items-center justify-between w-full">
-          <div className="space-y-2">
-            <div className="flex items-center gap-4">
-              <Skeleton className="h-3 w-8" />
-              <Skeleton className="h-3 w-8" />
-            </div>
-            <div className="flex items-center gap-4">
-              <Skeleton className="h-3 w-6" />
-              <Skeleton className="h-3 w-6" />
-              <Skeleton className="h-3 w-6" />
-            </div>
-            <div className="flex items-center gap-4">
-              <Skeleton className="h-3 w-6" />
-              <Skeleton className="h-3 w-10" />
-            </div>
-          </div>
-          <div className="flex flex-col gap-2 flex-shrink-0 text-right pr-12">
-            <Skeleton className="h-3 w-12" />
-            <Skeleton className="h-3 w-12" />
-          </div>
-        </div>
-      </TableCell>
+              {/* Price changes + audit */}
+              <TableCell>
+                <div className="flex items-center justify-between w-full">
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-4">
+                      <Skeleton className="h-3 w-8" />
+                      <Skeleton className="h-3 w-8" />
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <Skeleton className="h-3 w-6" />
+                      <Skeleton className="h-3 w-6" />
+                      <Skeleton className="h-3 w-6" />
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <Skeleton className="h-3 w-6" />
+                      <Skeleton className="h-3 w-10" />
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-2 flex-shrink-0 text-right pr-12">
+                    <Skeleton className="h-3 w-12" />
+                    <Skeleton className="h-3 w-12" />
+                  </div>
+                </div>
+              </TableCell>
 
-      {/* Action button */}
-      <TableCell>
-        <Button size="sm" disabled variant="primaryBlue" className="w-16">
-          <Skeleton className="h-4 w-12" />
-        </Button>
-      </TableCell>
-    </TableRow>
-
+              {/* Action button */}
+              <TableCell>
+                <Button
+                  size="sm"
+                  disabled
+                  variant="primaryBlue"
+                  className="w-16"
+                >
+                  <Skeleton className="h-4 w-12" />
+                </Button>
+              </TableCell>
+            </TableRow>
           ))}
         </TableBody>
       </Table>

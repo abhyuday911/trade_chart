@@ -8,14 +8,18 @@ import {
 import { Filter } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import { Separator } from "../ui/separator";
+import { TokenData } from "@/types/trading";
 
 interface TradingHeaderProps {
   activeTab: string;
   activeTimeframe: string;
   onTabChange: (tab: string) => void;
   onTimeframeChange: (timeframe: string) => void;
-  onSortChange: (sortField: string, sortDirection: "asc" | "desc") => void; // Callback for sorting changes
-  sortField: string;
+  onSortChange: (
+    sortField: keyof TokenData,
+    sortDirection: "asc" | "desc"
+  ) => void; // Callback for sorting changes
+  sortField: keyof TokenData;
   sortDirection: "asc" | "desc";
 }
 
@@ -83,14 +87,22 @@ export const TradingHeader: React.FC<TradingHeaderProps> = ({
                   <p className="text-sm font-medium">Market Cap</p>
                   <div className="flex flex-col space-y-1 mt-1">
                     <Button
-                      variant={"ghost"}
+                      variant={
+                        sortField === "marketCap" && sortDirection === "desc"
+                          ? "default"
+                          : "ghost"
+                      }
                       size="sm"
                       onClick={() => onSortChange("marketCap", "desc")}
                     >
                       High to Low
                     </Button>
                     <Button
-                      variant={"ghost"}
+                      variant={
+                        sortField === "marketCap" && sortDirection === "asc"
+                          ? "default"
+                          : "ghost"
+                      }
                       size="sm"
                       onClick={() => onSortChange("marketCap", "asc")}
                     >
@@ -106,14 +118,22 @@ export const TradingHeader: React.FC<TradingHeaderProps> = ({
                   <p className="text-sm font-medium">Liquidity</p>
                   <div className="flex flex-col space-y-1 mt-1">
                     <Button
-                      variant={"ghost"}
+                      variant={
+                        sortField === "liquidity" && sortDirection === "desc"
+                          ? "default"
+                          : "ghost"
+                      }
                       size="sm"
                       onClick={() => onSortChange("liquidity", "desc")}
                     >
                       High to Low
                     </Button>
                     <Button
-                      variant={"ghost"}
+                      variant={
+                        sortField === "liquidity" && sortDirection === "asc"
+                          ? "default"
+                          : "ghost"
+                      }
                       size="sm"
                       onClick={() => onSortChange("liquidity", "asc")}
                     >
@@ -129,7 +149,11 @@ export const TradingHeader: React.FC<TradingHeaderProps> = ({
                   <p className="text-sm font-medium">Volume</p>
                   <div className="flex flex-col space-y-1 mt-1">
                     <Button
-                      variant={"ghost"}
+                      variant={
+                        sortField === "volume24h" && sortDirection === "desc"
+                          ? "default"
+                          : "ghost"
+                      }
                       size="sm"
                       onClick={() => onSortChange("volume24h", "desc")}
                     >

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { TokenData } from "@/types/trading";
 import { TokenRow } from "./TradingRows";
 import {
@@ -15,16 +15,19 @@ import { ArrowDown, ArrowUp } from "lucide-react";
 interface TradingTableProps {
   tokens: TokenData[];
   isLoading?: boolean;
+  sortField: keyof TokenData | null;
+  sortDirection: "asc" | "desc";
+  onSortChange: (field: keyof TokenData, direction: "asc" | "desc") => void;
 }
 
 export const TradingTable: React.FC<TradingTableProps> = ({
   tokens,
   isLoading = false,
+  sortField,
+  sortDirection,
+  onSortChange,
 }) => {
-  const [sortColumn, setSortColumn] = useState<string | null>(null);
-  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
-
-  const headers = [
+  const headers: { label: string; key: keyof TokenData | null }[] = [
     { label: "Pair Info", key: "symbol" },
     { label: "Market Cap", key: "marketCap" },
     { label: "Liquidity", key: "liquidity" },
@@ -34,32 +37,13 @@ export const TradingTable: React.FC<TradingTableProps> = ({
     { label: "Action", key: null }, // No sorting for "Action"
   ];
 
-  // Sorting logic
-  const sortedTokens = [...tokens].sort((a, b) => {
-    if (!sortColumn) return 0; // No sorting if no column is selected
-
-    const aValue = a[sortColumn as keyof TokenData];
-    const bValue = b[sortColumn as keyof TokenData];
-
-    if (typeof aValue === "number" && typeof bValue === "number") {
-      return sortDirection === "asc" ? aValue - bValue : bValue - aValue;
-    }
-
-    if (typeof aValue === "string" && typeof bValue === "string") {
-      return sortDirection === "asc"
-        ? aValue.localeCompare(bValue)
-        : bValue.localeCompare(aValue);
-    }
-
-    return 0;
-  });
-
-  const handleSort = (key: string | null) => {
-    if (sortColumn === key) {
-      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+  const handleSort = (key: keyof TokenData | null) => {
+    if (!key) return;
+    if (sortField === key) {
+      const nextDirection = sortDirection === "asc" ? "desc" : "asc";
+      onSortChange(key, nextDirection);
     } else {
-      setSortColumn(key);
-      setSortDirection("asc");
+      onSortChange(key, "asc");
     }
   };
 
@@ -72,14 +56,14 @@ export const TradingTable: React.FC<TradingTableProps> = ({
               <TableHead
                 key={label}
                 className="font-medium text-muted-foreground px-0 first:sm:px-[12px] h-[32px] sm:h-[48px] min-h-[32px] sm:min-h-[48px] max-h-[32px] cursor-pointer select-none" // Added `select-none` here
-                onClick={() => key && handleSort(key)}
+                onClick={() => key && handleSort(key as keyof TokenData)}
               >
                 <div className="flex flex-row gap-[4px] px-[12px] justify-start items-center">
                   <span className="text-textTertiary text-[12px] font-medium">
                     {label}
                   </span>
                   <span className="w-4 h-4 flex items-center justify-center">
-                    {sortColumn === key &&
+                    {sortField === key &&
                       (sortDirection === "asc" ? (
                         <ArrowUp className="w-4 h-4" />
                       ) : (
@@ -92,12 +76,8 @@ export const TradingTable: React.FC<TradingTableProps> = ({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {sortedTokens.map((token) => (
-            <TokenRow
-              key={token.id}
-              token={mockTokens.find((t) => t.id === token.id) || token}
-              isLoading={isLoading}
-            />
+          {tokens.map((token) => (
+            <TokenRow key={token.id} token={token} isLoading={isLoading} />
           ))}
         </TableBody>
       </Table>

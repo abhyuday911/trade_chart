@@ -1,31 +1,47 @@
 "use client";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { TradingHeader } from "./TradingHeader";
 import { TradingTable } from "./TradingTable";
 import { TableSkeleton, ErrorBoundaryFallback } from "./LoadingStates";
 import { useTradingData } from "@/hooks/useTradingData";
+import { TokenData } from "@/types/trading";
 
 export const TradingDashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState("Trending");
   const [activeTimeframe, setActiveTimeframe] = useState("1h");
-  const [sortField, setSortField] = useState<string>("marketCap");
+  const [sortField, setSortField] = useState<keyof TokenData>("marketCap");
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
 
   const { tokens, isLoading, error, refetch } = useTradingData(activeTimeframe);
 
-  const handleSortChange = (field: string, direction: "asc" | "desc") => {
+  const handleSortChange = (
+    field: keyof TokenData | string,
+    direction: "asc" | "desc"
+  ) => {
     console.log("Sorting by:", field, direction);
-    setSortField(field);
+    setSortField(field as keyof TokenData);
     setSortDirection(direction);
   };
 
-  const sortedTokens = [...tokens].sort((a, b) => {
-    if (sortDirection === "asc") {
-      return a[sortField] > b[sortField] ? 1 : -1;
-    } else {
-      return a[sortField] < b[sortField] ? 1 : -1;
-    }
-  });
+  const sortedTokens = useMemo(() => {
+    const copy = [...tokens];
+    return copy.sort((a, b) => {
+      const aValue = a[sortField] as unknown;
+      const bValue = b[sortField] as unknown;
+
+      if (typeof aValue === "number" && typeof bValue === "number") {
+        return sortDirection === "asc" ? aValue - bValue : bValue - aValue;
+      }
+
+      if (typeof aValue === "string" && typeof bValue === "string") {
+        return sortDirection === "asc"
+          ? aValue.localeCompare(bValue)
+          : bValue.localeCompare(aValue);
+      }
+
+      return 0;
+    });
+  }, [tokens, sortField, sortDirection]);
 
   if (error) {
     return (
@@ -62,7 +78,16 @@ export const TradingDashboard: React.FC = () => {
       />
 
       <div className="h-full flex-1 overflow-auto p-[24px] px-[16px] lg:px-[24px]">
-        {isLoading ? <TableSkeleton /> : <TradingTable tokens={sortedTokens} />}
+        {isLoading ? (
+          <TableSkeleton />
+        ) : (
+          <TradingTable
+            tokens={sortedTokens}
+            sortField={sortField}
+            sortDirection={sortDirection}
+            onSortChange={handleSortChange}
+          />
+        )}
       </div>
     </div>
   );

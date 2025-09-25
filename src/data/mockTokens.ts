@@ -14,7 +14,9 @@ export const mockTokens: TokenData[] = [
     volume24h: 488000,
     transactions24h: 1960,
     transactions5m: 947,
-    priceHistory: [100, 102, 98, 101, 99.5, 100.2, 98.8, 99.1, 100.5, 99.2, 98.9, 100.8],
+    priceHistory: [
+      100, 102, 98, 101, 99.5, 100.2, 98.8, 99.1, 100.5, 99.2, 98.9, 100.8,
+    ],
     currentPrice: 0.9967,
     priceChange1h: -54.56,
     priceChange24h: -44.05,
@@ -43,7 +45,10 @@ export const mockTokens: TokenData[] = [
     volume24h: 156000,
     transactions24h: 1830,
     transactions5m: 809,
-    priceHistory: [0.01, 0.012, 0.015, 0.018, 0.022, 0.025, 0.028, 0.031, 0.034, 0.037, 0.035, 0.033],
+    priceHistory: [
+      0.01, 0.012, 0.015, 0.018, 0.022, 0.025, 0.028, 0.031, 0.034, 0.037,
+      0.035, 0.033,
+    ],
     currentPrice: 0.0334,
     priceChange1h: 22.82,
     priceChange24h: 4.32,
@@ -71,7 +76,10 @@ export const mockTokens: TokenData[] = [
     volume24h: 152000,
     transactions24h: 1060,
     transactions5m: 485,
-    priceHistory: [0.05, 0.052, 0.048, 0.051, 0.049, 0.053, 0.055, 0.054, 0.056, 0.058, 0.057, 0.055],
+    priceHistory: [
+      0.05, 0.052, 0.048, 0.051, 0.049, 0.053, 0.055, 0.054, 0.056, 0.058,
+      0.057, 0.055,
+    ],
     currentPrice: 0.055,
     priceChange1h: 28.57,
     priceChange24h: 1.61,
@@ -100,7 +108,10 @@ export const mockTokens: TokenData[] = [
     volume24h: 978000,
     transactions24h: 989,
     transactions5m: 369,
-    priceHistory: [0.02, 0.025, 0.03, 0.035, 0.04, 0.045, 0.048, 0.052, 0.055, 0.058, 0.061, 0.06],
+    priceHistory: [
+      0.02, 0.025, 0.03, 0.035, 0.04, 0.045, 0.048, 0.052, 0.055, 0.058, 0.061,
+      0.06,
+    ],
     currentPrice: 0.0603,
     priceChange1h: 15.21,
     priceChange24h: 1.1,
@@ -126,7 +137,10 @@ export const mockTokens: TokenData[] = [
     volume24h: 159000,
     transactions24h: 2060,
     transactions5m: 828,
-    priceHistory: [0.08, 0.075, 0.07, 0.065, 0.062, 0.058, 0.055, 0.052, 0.055, 0.058, 0.061, 0.062],
+    priceHistory: [
+      0.08, 0.075, 0.07, 0.065, 0.062, 0.058, 0.055, 0.052, 0.055, 0.058, 0.061,
+      0.062,
+    ],
     currentPrice: 0.0624,
     priceChange1h: 15.21,
     priceChange24h: 1.1,
@@ -154,7 +168,9 @@ export const mockTokens: TokenData[] = [
     volume24h: 179000,
     transactions24h: 202,
     transactions5m: 128,
-    priceHistory: [0.2, 0.22, 0.25, 0.24, 0.26, 0.28, 0.27, 0.29, 0.31, 0.3, 0.32, 0.31],
+    priceHistory: [
+      0.2, 0.22, 0.25, 0.24, 0.26, 0.28, 0.27, 0.29, 0.31, 0.3, 0.32, 0.31,
+    ],
     currentPrice: 0.311,
     priceChange1h: 14.31,
     priceChange24h: 0.91,
@@ -180,7 +196,10 @@ export const mockTokens: TokenData[] = [
     volume24h: 32000,
     transactions24h: 611,
     transactions5m: 85,
-    priceHistory: [0.001, 0.0012, 0.0011, 0.0009, 0.0008, 0.0007, 0.0009, 0.0011, 0.0012, 0.0013, 0.0012, 0.0119],
+    priceHistory: [
+      0.001, 0.0012, 0.0011, 0.0009, 0.0008, 0.0007, 0.0009, 0.0011, 0.0012,
+      0.0013, 0.0012, 0.0119,
+    ],
     currentPrice: 0.0119,
     priceChange1h: 14.31,
     priceChange24h: 0.91,
@@ -207,7 +226,9 @@ export const mockTokens: TokenData[] = [
     volume24h: 118000,
     transactions24h: 742,
     transactions5m: 199,
-    priceHistory: [0.4, 0.42, 0.38, 0.41, 0.43, 0.44, 0.46, 0.48, 0.45, 0.47, 0.5, 0.52],
+    priceHistory: [
+      0.4, 0.42, 0.38, 0.41, 0.43, 0.44, 0.46, 0.48, 0.45, 0.47, 0.5, 0.52,
+    ],
     currentPrice: 0.52,
     priceChange1h: 6.5,
     priceChange24h: 15.2,
@@ -236,7 +257,9 @@ export const mockTokens: TokenData[] = [
     volume24h: 32000,
     transactions24h: 410,
     transactions5m: 77,
-    priceHistory: [0.9, 0.92, 0.88, 0.86, 0.84, 0.85, 0.83, 0.87, 0.9, 0.93, 0.91, 0.92],
+    priceHistory: [
+      0.9, 0.92, 0.88, 0.86, 0.84, 0.85, 0.83, 0.87, 0.9, 0.93, 0.91, 0.92,
+    ],
     currentPrice: 0.92,
     priceChange1h: -1.2,
     priceChange24h: -0.8,
@@ -264,7 +287,9 @@ export const mockTokens: TokenData[] = [
     volume24h: 215000,
     transactions24h: 820,
     transactions5m: 260,
-    priceHistory: [0.15, 0.16, 0.18, 0.17, 0.2, 0.22, 0.25, 0.24, 0.26, 0.28, 0.3, 0.29],
+    priceHistory: [
+      0.15, 0.16, 0.18, 0.17, 0.2, 0.22, 0.25, 0.24, 0.26, 0.28, 0.3, 0.29,
+    ],
     currentPrice: 0.29,
     priceChange1h: 7.8,
     priceChange24h: 14.6,
@@ -293,7 +318,10 @@ export const mockTokens: TokenData[] = [
     volume24h: 950000,
     transactions24h: 5210,
     transactions5m: 1420,
-    priceHistory: [0.002, 0.0025, 0.003, 0.0032, 0.0035, 0.004, 0.0042, 0.0045, 0.0047, 0.005, 0.0052, 0.0055],
+    priceHistory: [
+      0.002, 0.0025, 0.003, 0.0032, 0.0035, 0.004, 0.0042, 0.0045, 0.0047,
+      0.005, 0.0052, 0.0055,
+    ],
     currentPrice: 0.0055,
     priceChange1h: 34.2,
     priceChange24h: 128.7,
@@ -321,7 +349,9 @@ export const mockTokens: TokenData[] = [
     volume24h: 450000,
     transactions24h: 1780,
     transactions5m: 460,
-    priceHistory: [2.1, 2.2, 2.3, 2.28, 2.25, 2.32, 2.35, 2.4, 2.5, 2.55, 2.6, 2.58],
+    priceHistory: [
+      2.1, 2.2, 2.3, 2.28, 2.25, 2.32, 2.35, 2.4, 2.5, 2.55, 2.6, 2.58,
+    ],
     currentPrice: 2.58,
     priceChange1h: 1.5,
     priceChange24h: 3.1,
@@ -349,7 +379,9 @@ export const mockTokens: TokenData[] = [
     volume24h: 980000,
     transactions24h: 3890,
     transactions5m: 1120,
-    priceHistory: [1.0, 1.0, 0.999, 1.001, 1.0, 1.0, 0.999, 1.0, 1.001, 0.999, 1.0, 1.0],
+    priceHistory: [
+      1.0, 1.0, 0.999, 1.001, 1.0, 1.0, 0.999, 1.0, 1.001, 0.999, 1.0, 1.0,
+    ],
     currentPrice: 1.0,
     priceChange1h: 0.0,
     priceChange24h: 0.0,
@@ -377,7 +409,10 @@ export const mockTokens: TokenData[] = [
     volume24h: 135000,
     transactions24h: 1100,
     transactions5m: 330,
-    priceHistory: [0.05, 0.055, 0.06, 0.065, 0.07, 0.072, 0.068, 0.07, 0.075, 0.078, 0.08, 0.082],
+    priceHistory: [
+      0.05, 0.055, 0.06, 0.065, 0.07, 0.072, 0.068, 0.07, 0.075, 0.078, 0.08,
+      0.082,
+    ],
     currentPrice: 0.082,
     priceChange1h: 8.9,
     priceChange24h: 12.6,
@@ -393,7 +428,6 @@ export const mockTokens: TokenData[] = [
     lastUpdated: new Date(),
   },
 ];
-
 
 export const generateMockPriceUpdate = (token: TokenData): TokenData => {
   const changePercent = (Math.random() - 0.5) * 0.1; // ±5% change
