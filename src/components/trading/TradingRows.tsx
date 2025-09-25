@@ -2,7 +2,6 @@ import React from "react";
 import { TokenData } from "@/types/trading";
 import { PriceChart } from "./PriceChart";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { TableCell, TableRow } from "@/components/ui/table";
 import {
   Tooltip,
@@ -10,7 +9,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { CheckCircle, Copy, ExternalLink, Shield } from "lucide-react";
+import { CheckCircle, Copy, ExternalLink } from "lucide-react";
 
 interface TokenRowProps {
   token: TokenData;
@@ -46,7 +45,7 @@ export const TokenRow: React.FC<TokenRowProps> = ({
           <div className="flex items-center gap-3 px-[12px]">
             <div className="relative pointer-events-none border-textPrimary/10 ">
               <div
-                className={`w-full h-full flex items-center justify-center text-white font-bold text-sm border-[1px] w-[36px] sm:w-[56px] h-[36px] sm:h-[56px] z-10 rounded-[3px] overflow-hidden ${
+                className={`w-full h-full flex items-center justify-center text-white font-bold text-sm border-[1px] sm:w-[56px] sm:h-[56px] z-10 rounded-[3px] overflow-hidden ${
                   token.rank === 1
                     ? "bg-gradient-to-br from-yellow-400 to-orange-500"
                     : token.rank === 2
@@ -166,7 +165,7 @@ export const TokenRow: React.FC<TokenRowProps> = ({
             </div>
           </div>
 
-          <div className="flex flex-col space-y-1 flex-shrink-0 text-right">
+          <div className="flex flex-col space-y-1 flex-shrink-0 text-right pr-12">
             <span className="text-muted-foreground text-xs">
               X {token.holders}
             </span>

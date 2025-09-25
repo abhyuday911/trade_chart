@@ -54,13 +54,10 @@ export const TradingTable: React.FC<TradingTableProps> = ({
     return 0;
   });
 
-  // Handle header click
   const handleSort = (key: string | null) => {
     if (sortColumn === key) {
-      // Toggle direction if the same column is clicked
       setSortDirection(sortDirection === "asc" ? "desc" : "asc");
     } else {
-      // Set new column and default to ascending
       setSortColumn(key);
       setSortDirection("asc");
     }
