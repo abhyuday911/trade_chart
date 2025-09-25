@@ -1,4 +1,25 @@
 import React from 'react';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 interface PriceChartProps {
   data: number[];
@@ -9,33 +30,54 @@ interface PriceChartProps {
 export const PriceChart: React.FC<PriceChartProps> = ({ data, isPositive, className = '' }) => {
   if (!data || data.length < 2) return null;
 
-  const width = 64;
-  const height = 32;
-  const padding = 2;
+  const chartData = {
+    labels: data.map((_, index) => index),
+    datasets: [
+      {
+        data: data,
+        borderColor: isPositive ? '#22c55e' : '#ef4444',
+        backgroundColor: 'transparent',
+        borderWidth: 2,
+        pointRadius: 0,
+        pointHoverRadius: 0,
+        tension: 0.1,
+      },
+    ],
+  };
 
-  const min = Math.min(...data);
-  const max = Math.max(...data);
-  const range = max - min || 1;
-
-  const points = data.map((value, index) => {
-    const x = padding + (index / (data.length - 1)) * (width - 2 * padding);
-    const y = padding + (1 - (value - min) / range) * (height - 2 * padding);
-    return `${x},${y}`;
-  }).join(' ');
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        enabled: false,
+      },
+    },
+    scales: {
+      x: {
+        display: false,
+      },
+      y: {
+        display: false,
+      },
+    },
+    elements: {
+      point: {
+        radius: 0,
+      },
+    },
+    interaction: {
+      intersect: false,
+      mode: 'index' as const,
+    },
+  };
 
   return (
-    <div className={`price-chart ${className}`}>
-      <svg width={width} height={height} className="overflow-visible">
-        <polyline
-          points={points}
-          fill="none"
-          stroke={isPositive ? 'hsl(var(--success))' : 'hsl(var(--danger))'}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="transition-all duration-300"
-        />
-      </svg>
+    <div className={`w-20 h-10 ${className}`}>
+      <Line data={chartData} options={options} />
     </div>
   );
 };

@@ -20,7 +20,7 @@ export const TradingDashboard: React.FC = () => {
         onTimeframeChange={setActiveTimeframe}
       />
 
-      <div className="p-4 h-full flex-1 overflow-auto">
+      <div className="h-full flex-1 overflow-auto p-[24px] px-[16px] lg:px-[24px]">
         {isLoading ? <TableSkeleton /> : <TradingTable tokens={mockTokens} />}
       </div>
     </div>
