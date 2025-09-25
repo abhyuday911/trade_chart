@@ -136,7 +136,7 @@ export const TokenRow: React.FC<TokenRowProps> = ({
         </div>
       </TableCell>
 
-      <TableCell className=" min-w-[180px] py-4 px-0 sm:px-[12px] flex">
+      <TableCell className=" min-w-[200px] py-4 px-0 sm:px-[12px] flex">
         <div className="flex items-center justify-between w-full">
           <div className="space-y-1 ">
             <div className="flex items-center gap-4 text-xs">
