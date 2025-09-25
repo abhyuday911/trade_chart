@@ -40,7 +40,7 @@ export const TokenRow: React.FC<TokenRowProps> = ({
 
   return (
     <TableRow className="hover:bg-muted/50 cursor-pointer">
-      <TableCell className="py-4 px-0 sm:px-[12px]">
+      <TableCell className=" min-w-[120px] py-4 px-0 sm:px-[12px]">
         <div className="flex justify-between">
           <div className="flex items-center gap-3 px-[12px]">
             <div className="relative pointer-events-none border-textPrimary/10 ">
@@ -105,7 +105,7 @@ export const TokenRow: React.FC<TokenRowProps> = ({
         </div>
       </TableCell>
 
-      <TableCell className="py-4 px-0 sm:px-[12px]">
+      <TableCell className=" min-w-[120px] py-4 px-0 sm:px-[12px]">
         <div className="flex flex-col">
           <span className="font-medium">
             {formatNumber(token.marketCap, "$")}
@@ -118,15 +118,15 @@ export const TokenRow: React.FC<TokenRowProps> = ({
         </div>
       </TableCell>
 
-      <TableCell className="py-4 px-0 sm:px-[12px]">
+      <TableCell className=" min-w-[120px] py-4 px-0 sm:px-[12px]">
         <span>{formatNumber(token.liquidity, "$")}</span>
       </TableCell>
 
-      <TableCell className="py-4 px-0 sm:px-[12px]">
+      <TableCell className=" min-w-[120px] py-4 px-0 sm:px-[12px]">
         <span>{formatNumber(token.volume24h, "$")}</span>
       </TableCell>
 
-      <TableCell className="py-4 px-0 sm:px-[12px]">
+      <TableCell className=" min-w-[120px] py-4 px-0 sm:px-[12px]">
         <div className="flex flex-col">
           <span>{formatNumber(token.transactions24h)}</span>
           <span className="text-muted-foreground text-xs">
@@ -136,7 +136,7 @@ export const TokenRow: React.FC<TokenRowProps> = ({
         </div>
       </TableCell>
 
-      <TableCell className="py-4 px-0 sm:px-[12px] flex gap-10">
+      <TableCell className=" min-w-[180px] py-4 px-0 sm:px-[12px] flex">
         <div className="flex items-center justify-between w-full">
           <div className="space-y-1 ">
             <div className="flex items-center gap-4 text-xs">
@@ -165,7 +165,7 @@ export const TokenRow: React.FC<TokenRowProps> = ({
             </div>
           </div>
 
-          <div className="flex flex-col space-y-1 flex-shrink-0 text-right pr-12">
+          <div className="flex flex-col space-y-1 flex-shrink-0 text-right">
             <span className="text-muted-foreground text-xs">
               X {token.holders}
             </span>
@@ -176,7 +176,7 @@ export const TokenRow: React.FC<TokenRowProps> = ({
         </div>
       </TableCell>
 
-      <TableCell className="py-4 px-0 sm:px-[12px]">
+      <TableCell className=" min-w-[120px] py-4 px-0 sm:px-[12px]">
         <div className="flex items-center  gap-2">
           <Button
             size="sm"

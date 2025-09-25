@@ -9,7 +9,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Card } from "@/components/ui/card";
-import { mockTokens } from "@/data/mockTokens";
 import { ArrowDown, ArrowUp } from "lucide-react";
 
 interface TradingTableProps {

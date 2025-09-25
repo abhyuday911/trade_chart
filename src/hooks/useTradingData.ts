@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { TokenData, PriceUpdate } from "@/types/trading";
 import { mockTokens } from "@/data/mockTokens";
@@ -10,10 +10,15 @@ export const useTradingData = (timeframe: string = "1h") => {
   class MockWebSocket {
     private callbacks: ((data: PriceUpdate) => void)[] = [];
     private interval: NodeJS.Timeout | null = null;
-    private getQueryData: any;
+    private getQueryData: (
+      key: (string | TokenData[])[]
+    ) => TokenData[] | undefined;
     private timeframe: string;
 
-    constructor(getQueryData: any, timeframe: string) {
+    constructor(
+      getQueryData: (key: (string | TokenData[])[]) => TokenData[] | undefined,
+      timeframe: string
+    ) {
       this.getQueryData = getQueryData;
       this.timeframe = timeframe;
     }
@@ -141,22 +146,32 @@ export const useTradingData = (timeframe: string = "1h") => {
     },
   });
 
-  useEffect(() => {
-    const wsConnection = new MockWebSocket(
-      queryClient.getQueryData.bind(queryClient),
-      timeframe
-    );
-    wsConnection.connect();
+  const memoizedUpdateTokenPrice = useCallback(updateTokenPrice.mutate, [
+    updateTokenPrice,
+  ]);
 
-    const unsubscribe = wsConnection.subscribe((update) => {
-      updateTokenPrice.mutate(update);
+  const wsRef = useRef<MockWebSocket | null>(null);
+
+  useEffect(() => {
+    if (!wsRef.current) {
+      wsRef.current = new MockWebSocket(
+        queryClient.getQueryData.bind(queryClient),
+        timeframe
+      );
+      wsRef.current.connect();
+    }
+
+    const unsubscribe = wsRef.current.subscribe((update) => {
+      memoizedUpdateTokenPrice(update);
     });
 
     return () => {
       unsubscribe();
-      wsConnection.disconnect();
+      if (wsRef.current) {
+        wsRef.current.disconnect();
+      }
     };
-  }, [queryClient, timeframe]);
+  }, [queryClient, timeframe, memoizedUpdateTokenPrice]);
 
   return {
     tokens,
