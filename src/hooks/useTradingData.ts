@@ -31,7 +31,12 @@ export const useTradingData = (timeframe: string = "1h") => {
           this.timeframe,
         ]) as TokenData[];
 
-        if (!currentTokens || currentTokens.length === 0) return;
+        if (!currentTokens || currentTokens.length === 0) {
+          console.log(
+            `No tokens found for timeframe ${this.timeframe}, skipping update`
+          );
+          return;
+        }
 
         const randomToken =
           currentTokens[Math.floor(Math.random() * currentTokens.length)];
@@ -72,7 +77,9 @@ export const useTradingData = (timeframe: string = "1h") => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       return mockTokens;
     },
-    staleTime: 30000,
+    staleTime: 0, // Always refetch when timeframe changes
+    refetchOnWindowFocus: false,
+    refetchOnMount: true,
   });
 
   const updateTokenPrice = useMutation({
@@ -153,25 +160,34 @@ export const useTradingData = (timeframe: string = "1h") => {
   const wsRef = useRef<MockWebSocket | null>(null);
 
   useEffect(() => {
-    if (!wsRef.current) {
+    // Clean up existing WebSocket when timeframe changes
+    if (wsRef.current) {
+      wsRef.current.disconnect();
+      wsRef.current = null;
+    }
+
+    // Only start WebSocket if we have tokens data
+    if (tokens.length > 0) {
+      // Create new WebSocket for the new timeframe
       wsRef.current = new MockWebSocket(
         queryClient.getQueryData.bind(queryClient),
         timeframe
       );
       wsRef.current.connect();
+
+      const unsubscribe = wsRef.current.subscribe((update) => {
+        memoizedUpdateTokenPrice(update);
+      });
+
+      return () => {
+        unsubscribe();
+        if (wsRef.current) {
+          wsRef.current.disconnect();
+          wsRef.current = null;
+        }
+      };
     }
-
-    const unsubscribe = wsRef.current.subscribe((update) => {
-      memoizedUpdateTokenPrice(update);
-    });
-
-    return () => {
-      unsubscribe();
-      if (wsRef.current) {
-        wsRef.current.disconnect();
-      }
-    };
-  }, [queryClient, timeframe, memoizedUpdateTokenPrice]);
+  }, [queryClient, timeframe, memoizedUpdateTokenPrice, tokens.length]);
 
   return {
     tokens,
