@@ -373,7 +373,7 @@ export const mockTokens: TokenData[] = [
     symbol: "SXD",
     contractAddress: "5t",
     logoUrl: "",
-    marketCap: 125000000,
+    marketCap: 125000,
     marketCapChange24h: 0.02,
     liquidity: 25000000,
     volume24h: 980000,

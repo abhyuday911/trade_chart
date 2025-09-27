@@ -26,8 +26,8 @@ export const TradingDashboard: React.FC = () => {
   const sortedTokens = useMemo(() => {
     const copy = [...tokens];
     return copy.sort((a, b) => {
-      const aValue = a[sortField] as unknown;
-      const bValue = b[sortField] as unknown;
+      const aValue = a[sortField];
+      const bValue = b[sortField];
 
       if (typeof aValue === "number" && typeof bValue === "number") {
         return sortDirection === "asc" ? aValue - bValue : bValue - aValue;

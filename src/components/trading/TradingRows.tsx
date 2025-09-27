@@ -40,12 +40,13 @@ export const TokenRow: React.FC<TokenRowProps> = ({
 
   return (
     <TableRow className="hover:bg-muted/50 cursor-pointer">
-      <TableCell className=" min-w-[120px] py-4 px-0 sm:px-[12px]">
+      {/* Rank + Symbol */}
+      <TableCell className="min-w-[180px] py-4 px-0 sm:px-[12px]">
         <div className="flex justify-between">
           <div className="flex items-center gap-3 px-[12px]">
-            <div className="relative pointer-events-none border-textPrimary/10 ">
+            <div className="relative pointer-events-none border-textPrimary/10">
               <div
-                className={`w-full h-full flex items-center justify-center text-white font-bold text-sm border-[1px] sm:w-[56px] sm:h-[56px] z-10 rounded-[3px] overflow-hidden ${
+                className={`flex items-center justify-center text-white font-bold text-sm border-[1px] sm:w-[56px] sm:h-[56px] z-10 rounded-[3px] overflow-hidden ${
                   token.rank === 1
                     ? "bg-gradient-to-br from-yellow-400 to-orange-500"
                     : token.rank === 2
@@ -69,6 +70,7 @@ export const TokenRow: React.FC<TokenRowProps> = ({
                 </div>
               )}
             </div>
+
             <div className="flex flex-col">
               <div className="flex items-center gap-2">
                 <span className="font-medium">{token.symbol}</span>
@@ -77,85 +79,110 @@ export const TokenRow: React.FC<TokenRowProps> = ({
                 </span>
               </div>
               <div className="flex items-center gap-1 text-muted-foreground text-xs">
-                <span>{token.contractAddress}</span>
+                <span className="truncate max-w-[100px]">
+                  {token.contractAddress}
+                </span>
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger>
-                      <Copy
-                        className="w-3 h-3 cursor-pointer hover:text-foreground transition-colors"
-                        onClick={copyAddress}
-                      />
+                      <div className="w-4 h-4 flex items-center justify-center">
+                        <Copy
+                          className="w-3 h-3 cursor-pointer hover:text-foreground transition-colors"
+                          onClick={copyAddress}
+                        />
+                      </div>
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>Copy contract address</p>
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
-                <ExternalLink className="w-3 h-3 cursor-pointer hover:text-foreground transition-colors" />
+                <div className="w-4 h-4 flex items-center justify-center">
+                  <ExternalLink className="w-3 h-3 cursor-pointer hover:text-foreground transition-colors" />
+                </div>
               </div>
             </div>
           </div>
+
+          {/* Price Chart */}
           <div className="flex items-center gap-1 mr-4">
-            <PriceChart
-              data={token.priceHistory}
-              isPositive={token.marketCapChange24h >= 0}
-              className="w-24 h-6"
-            />
+            {isLoading ? (
+              <div className="w-24 h-6 bg-muted animate-pulse rounded" />
+            ) : (
+              <PriceChart
+                data={token.priceHistory}
+                isPositive={token.marketCapChange24h >= 0}
+                className="w-24 h-6"
+              />
+            )}
           </div>
         </div>
       </TableCell>
 
-      <TableCell className=" min-w-[120px] py-4 px-0 sm:px-[12px]">
+      {/* Market Cap */}
+      <TableCell className="min-w-[120px] py-4 px-0 sm:px-[12px]">
         <div className="flex flex-col">
-          <span className="font-medium">
+          <span className="font-medium tabular-nums min-w-[80px]">
             {formatNumber(token.marketCap, "$")}
           </span>
           <span
-            className={formatPercentage(token.marketCapChange24h).className}
+            className={`tabular-nums min-w-[60px] ${formatPercentage(token.marketCapChange24h).className}`}
           >
             {formatPercentage(token.marketCapChange24h).value}
           </span>
         </div>
       </TableCell>
 
-      <TableCell className=" min-w-[120px] py-4 px-0 sm:px-[12px]">
-        <span>{formatNumber(token.liquidity, "$")}</span>
+      {/* Liquidity */}
+      <TableCell className="min-w-[120px] py-4 px-0 sm:px-[12px]">
+        <span className="tabular-nums min-w-[80px] inline-block">
+          {formatNumber(token.liquidity, "$")}
+        </span>
       </TableCell>
 
-      <TableCell className=" min-w-[120px] py-4 px-0 sm:px-[12px]">
-        <span>{formatNumber(token.volume24h, "$")}</span>
+      {/* Volume */}
+      <TableCell className="min-w-[120px] py-4 px-0 sm:px-[12px]">
+        <span className="tabular-nums min-w-[80px] inline-block">
+          {formatNumber(token.volume24h, "$")}
+        </span>
       </TableCell>
 
-      <TableCell className=" min-w-[120px] py-4 px-0 sm:px-[12px]">
+      {/* Transactions */}
+      <TableCell className="min-w-[120px] py-4 px-0 sm:px-[12px]">
         <div className="flex flex-col">
-          <span>{formatNumber(token.transactions24h)}</span>
-          <span className="text-muted-foreground text-xs">
+          <span className="tabular-nums min-w-[60px]">
+            {formatNumber(token.transactions24h)}
+          </span>
+          <span className="text-muted-foreground text-xs tabular-nums">
             <span>{token.transactions5m}</span> /{" "}
             <span>{token.transactions24h}</span>
           </span>
         </div>
       </TableCell>
 
-      <TableCell className=" min-w-[200px] py-4 px-0 sm:px-[12px] flex">
+      {/* Price Changes & Audit */}
+      <TableCell className="min-w-[200px] py-4 px-0 sm:px-[12px] flex">
         <div className="flex items-center justify-between w-full">
-          <div className="space-y-1 ">
+          <div className="space-y-1">
             <div className="flex items-center gap-4 text-xs">
-              <span className={formatPercentage(token.priceChange1h).className}>
+              <span
+                className={`tabular-nums w-[60px] ${formatPercentage(token.priceChange1h).className}`}
+              >
                 {formatPercentage(token.priceChange1h).value}
               </span>
               <span
-                className={formatPercentage(token.priceChange24h).className}
+                className={`tabular-nums w-[60px] ${formatPercentage(token.priceChange24h).className}`}
               >
                 {formatPercentage(token.priceChange24h).value}
               </span>
             </div>
             <div className="flex items-center gap-4 text-xs text-muted-foreground">
-              <span>0%</span>
-              <span>0%</span>
-              <span>0%</span>
+              <span className="tabular-nums w-[40px]">0%</span>
+              <span className="tabular-nums w-[40px]">0%</span>
+              <span className="tabular-nums w-[40px]">0%</span>
             </div>
             <div className="flex items-center gap-4 text-xs text-muted-foreground">
-              <span>0%</span>
+              <span className="tabular-nums w-[40px]">0%</span>
               {token.audit === "paid" && (
                 <span className="text-green-500">Paid</span>
               )}
@@ -165,24 +192,26 @@ export const TokenRow: React.FC<TokenRowProps> = ({
             </div>
           </div>
 
-          <div className="flex flex-col space-y-1 flex-shrink-0 text-right">
-            <span className="text-muted-foreground text-xs">
+          <div className="flex flex-col space-y-1 flex-shrink-0">
+            <span className="text-muted-foreground text-xs tabular-nums">
               X {token.holders}
             </span>
-            <span className="text-muted-foreground text-xs">
+            <span className="text-muted-foreground text-xs tabular-nums">
               0t {token.fdv}
             </span>
           </div>
         </div>
       </TableCell>
 
-      <TableCell className=" min-w-[120px] py-4 px-0 sm:px-[12px]">
-        <div className="flex items-center  gap-2">
+      {/* Buy Button */}
+      <TableCell className="min-w-[120px] py-4 px-0 sm:px-[12px]">
+        <div className="flex items-center gap-2">
           <Button
             size="sm"
             disabled={isLoading}
-            variant={"primaryBlue"}
-            shape={"full"}
+            variant="primaryBlue"
+            shape="full"
+            className="min-w-[90px]"
           >
             {isLoading ? "Buying..." : "Buy"}
           </Button>
