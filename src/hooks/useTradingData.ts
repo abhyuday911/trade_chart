@@ -32,9 +32,6 @@ export const useTradingData = (timeframe: string = "1h") => {
         ]) as TokenData[];
 
         if (!currentTokens || currentTokens.length === 0) {
-          console.log(
-            `No tokens found for timeframe ${this.timeframe}, skipping update`
-          );
           return;
         }
 
@@ -49,7 +46,7 @@ export const useTradingData = (timeframe: string = "1h") => {
         };
 
         this.callbacks.forEach((callback) => callback(update));
-      }, 500);
+      }, 2000); // Reduced frequency from 500ms to 2000ms
     }
 
     disconnect() {
