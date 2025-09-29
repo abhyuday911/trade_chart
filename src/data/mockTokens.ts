@@ -386,7 +386,7 @@ export const mockTokens: TokenData[] = [
     priceChange1h: 0.0,
     priceChange24h: 0.0,
     holders: 18000,
-    fdv: 125000000,
+    fdv: 12500,
     verified: true,
     audit: "paid",
     socials: {

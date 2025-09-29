@@ -192,7 +192,7 @@ export const TokenRow: React.FC<TokenRowProps> = ({
             </div>
           </div>
 
-          <div className="flex flex-col space-y-1 flex-shrink-0">
+          <div className="flex flex-col space-y-1 flex-shrink-0 items-end">
             <span className="text-muted-foreground text-xs tabular-nums">
               X {token.holders}
             </span>
@@ -205,13 +205,12 @@ export const TokenRow: React.FC<TokenRowProps> = ({
 
       {/* Buy Button */}
       <TableCell className="min-w-[120px] py-4 px-0 sm:px-[12px]">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-end gap-2 mx-4">
           <Button
             size="sm"
             disabled={isLoading}
             variant="primaryBlue"
             shape="full"
-            className="min-w-[90px]"
           >
             {isLoading ? "Buying..." : "Buy"}
           </Button>
