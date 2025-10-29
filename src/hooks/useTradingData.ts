@@ -46,7 +46,7 @@ export const useTradingData = (timeframe: string = "1h") => {
         };
 
         this.callbacks.forEach((callback) => callback(update));
-      }, 2000); // Reduced frequency from 500ms to 2000ms
+      }, 500); // Reduced frequency from 500ms to 2000ms
     }
 
     disconnect() {
@@ -74,7 +74,7 @@ export const useTradingData = (timeframe: string = "1h") => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       return mockTokens;
     },
-    staleTime: 0, // Always refetch when timeframe changes
+    staleTime: 500, // Always refetch when timeframe changes
     refetchOnWindowFocus: false,
     refetchOnMount: true,
   });

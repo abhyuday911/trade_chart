@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { TokenData } from "@/types/trading";
 import { PriceChart } from "./PriceChart";
 import { Button } from "@/components/ui/button";
@@ -16,7 +16,7 @@ interface TokenRowProps {
   isLoading?: boolean;
 }
 
-export const TokenRow: React.FC<TokenRowProps> = ({
+const FnTokenRow: React.FC<TokenRowProps> = ({
   token,
   isLoading = false,
 }) => {
@@ -46,21 +46,20 @@ export const TokenRow: React.FC<TokenRowProps> = ({
           <div className="flex items-center gap-3 px-[12px]">
             <div className="relative pointer-events-none border-textPrimary/10">
               <div
-                className={`flex items-center justify-center text-white font-bold text-sm border-[1px] sm:w-[56px] sm:h-[56px] z-10 rounded-[3px] overflow-hidden ${
-                  token.rank === 1
-                    ? "bg-gradient-to-br from-yellow-400 to-orange-500"
-                    : token.rank === 2
+                className={`flex items-center justify-center text-white font-bold text-sm border-[1px] sm:w-[56px] sm:h-[56px] z-10 rounded-[3px] overflow-hidden ${token.rank === 1
+                  ? "bg-gradient-to-br from-yellow-400 to-orange-500"
+                  : token.rank === 2
                     ? "bg-gradient-to-br from-amber-600 to-yellow-600"
                     : token.rank === 3
-                    ? "bg-gradient-to-br from-orange-500 to-red-500"
-                    : token.rank === 4
-                    ? "bg-gradient-to-br from-blue-500 to-purple-500"
-                    : token.rank === 5
-                    ? "bg-gradient-to-br from-gray-400 to-gray-600"
-                    : token.rank === 6
-                    ? "bg-gradient-to-br from-blue-400 to-cyan-500"
-                    : "bg-gradient-to-br from-gray-500 to-gray-700"
-                }`}
+                      ? "bg-gradient-to-br from-orange-500 to-red-500"
+                      : token.rank === 4
+                        ? "bg-gradient-to-br from-blue-500 to-purple-500"
+                        : token.rank === 5
+                          ? "bg-gradient-to-br from-gray-400 to-gray-600"
+                          : token.rank === 6
+                            ? "bg-gradient-to-br from-blue-400 to-cyan-500"
+                            : "bg-gradient-to-br from-gray-500 to-gray-700"
+                  }`}
               >
                 {token.rank}
               </div>
@@ -219,3 +218,5 @@ export const TokenRow: React.FC<TokenRowProps> = ({
     </TableRow>
   );
 };
+
+export const TokenRow = memo(FnTokenRow)
